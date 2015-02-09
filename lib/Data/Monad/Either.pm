@@ -28,6 +28,16 @@ sub flat_map {
 
 # instance methods
 
+sub is_left {
+    my ($self) = @_;
+    return ref($self) eq __PACKAGE__ . '::Left';
+}
+
+sub is_right {
+    my ($self) = @_;
+    return ref($self) eq __PACKAGE__ . '::Right';
+}
+
 sub value {
     my ($self) = @_;
     return wantarray ? @$self : $self->[0];
@@ -36,14 +46,8 @@ sub value {
 package Data::Monad::Either::Left;
 use parent -norequire, 'Data::Monad::Either';
 
-sub is_left  { 1 }
-sub is_right { 0 }
-
 package Data::Monad::Either::Right;
 use parent -norequire, 'Data::Monad::Either';
-
-sub is_left  { 0 }
-sub is_right { 1 }
 
 1;
 
